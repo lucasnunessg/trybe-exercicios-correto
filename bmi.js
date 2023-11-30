@@ -1,5 +1,12 @@
+const readline = require ('readline-sync');
+
 const weightKg = 85;
 const heightCm = 180;
+
+const weight = readline.questionInt('“Whats your weight?”');
+const height = readline.questionInt('"Whats your height?”');
+
+const bmi = resultBMI(weight, height);
 
 function resultBMI(weight, height) {
     console.log(`Weight: ${weight}, Height: ${height}`);
