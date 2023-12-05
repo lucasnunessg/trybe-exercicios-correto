@@ -1,6 +1,7 @@
 // app.js
 const express = require('express');
-
+const auth = require('./middleware/auth');
+const generateToken = require('./utils/generateToken');
 const validateDifficulty = require('./middleware/validateDifficulty');
 const validateRating = require('./middleware/validateRating');
 const validateCreatedAt = require('./middleware/validateCreateAt');
@@ -12,7 +13,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post('/signup', (_req, res) => {
+app.post('/signup', (req, res) => {
   const { email, password, firstName, phone } = req.body;
 
   if ([email, password, firstName, phone].includes(undefined)) {
@@ -25,6 +26,7 @@ app.post('/signup', (_req, res) => {
 });
 
 app.post('/activities', 
+auth,
 validateDifficulty,
 validateRating, 
 validateCreatedAt, 
